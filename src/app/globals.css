@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Brand colors */
+  --color-navy:    #1B3A5C;
+  --color-sage:    #5B8A5A;
+  --color-coral:   #E8896A;
+  --color-sand:    #D4B896;
+  --color-seafoam: #B8D4CE;
+  --color-cream:   #F8F5F0;
+  --color-white:   #FFFFFF;
+
+  /* Font families */
+  --font-sans:    var(--font-nunito), "Nunito", system-ui, sans-serif;
+  --font-script:  var(--font-pacifico), "Pacifico", cursive;
+
+  /* Background / foreground */
+  --color-background: var(--color-white);
+  --color-foreground: var(--color-navy);
+
+  /* Shadow tokens */
+  --shadow-card:     0 1px 3px rgba(27,58,92,0.06), 0 4px 16px rgba(27,58,92,0.04);
+  --shadow-elevated: 0 4px 12px rgba(27,58,92,0.10), 0 12px 32px rgba(27,58,92,0.08);
+  --shadow-deep:     0 8px 24px rgba(27,58,92,0.14), 0 24px 64px rgba(27,58,92,0.12);
+}
+
+/* ─── Force light mode always — this is a childcare site ─── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #ffffff;
+    --foreground: #1B3A5C;
+    color-scheme: light;
+  }
+}
+
+/* ─── Base ──────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+}
+
+/* ─── Text selection ─────────────────────────────────────── */
+::selection {
+  background: #B8D4CE;
+  color: #1B3A5C;
+}
+
+/* ─── Custom scrollbar (WebKit) ─────────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F5F0;
+}
+::-webkit-scrollbar-thumb {
+  background: #B8D4CE;
+  border-radius: 99px;
+  border: 2px solid #F8F5F0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1B3A5C;
+}
+
+/* ─── Gradient utilities ─────────────────────────────────── */
+.gradient-ocean {
+  background: linear-gradient(180deg, #B8D4CE 0%, #ffffff 100%);
+}
+
+.gradient-hero {
+  background: linear-gradient(
+    180deg,
+    rgba(184, 212, 206, 0.30) 0%,
+    #ffffff 50%,
+    #F8F5F0 100%
+  );
+}
+
+/* ─── Shadow utilities ───────────────────────────────────── */
+.shadow-card {
+  box-shadow: 0 1px 3px rgba(27,58,92,0.06), 0 4px 16px rgba(27,58,92,0.04);
+}
+
+.shadow-elevated {
+  box-shadow: 0 4px 12px rgba(27,58,92,0.10), 0 12px 32px rgba(27,58,92,0.08);
+}
+
+.shadow-deep {
+  box-shadow: 0 8px 24px rgba(27,58,92,0.14), 0 24px 64px rgba(27,58,92,0.12);
+}
+
+/* ─── Section wave spacing ───────────────────────────────── */
+.section-wave-top {
+  padding-top: 5rem;
+}
+
+.section-wave-bottom {
+  padding-bottom: 5rem;
+}
+
+/* ─── Typography utilities ───────────────────────────────── */
+.font-display {
+  font-family: var(--font-nunito);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* ─── Keyframes ─────────────────────────────────────────── */
+@keyframes wave {
+  0%, 100% { transform: translateX(0); }
+  50%       { transform: translateX(-25px); }
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes float {
+  0%,  100% { transform: translateY(0)    rotate(0deg);  }
+  33%        { transform: translateY(-8px) rotate(1deg);  }
+  66%        { transform: translateY(-4px) rotate(-1deg); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1;   transform: scale(1);    }
+  50%       { opacity: 0.6; transform: scale(0.85); }
+}
+
+/* ─── Animation utilities ────────────────────────────────── */
+.animate-wave    { animation: wave      6s ease-in-out infinite; }
+.animate-bob     { animation: bob       3s ease-in-out infinite; }
+.animate-float   { animation: float     6s ease-in-out infinite; }
+.animate-shimmer { animation: shimmer   1.4s linear     infinite; }
+.animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+/* ─── Skeleton loading ───────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(184, 212, 206, 0.3) 25%,
+    rgba(184, 212, 206, 0.6) 50%,
+    rgba(184, 212, 206, 0.3) 75%
+  );
+  background-size: 400px 100%;
+  animation: shimmer 1.4s linear infinite;
+}
