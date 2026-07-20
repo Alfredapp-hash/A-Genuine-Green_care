@@ -37,3 +37,38 @@ export function localBusinessJsonLd(reviews: GoogleReview[]) {
     })),
   };
 }
+
+export function faqJsonLd(items: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+}
+
+export function serviceJsonLd(service: {
+  name: string;
+  shortDescription: string;
+  slug: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.name,
+    description: service.shortDescription,
+    provider: {
+      "@type": "LocalBusiness",
+      name: site.legalName,
+      telephone: site.phone,
+    },
+    areaServed: site.serviceAreaLabel,
+    url: `/services/${service.slug}`,
+  };
+}
