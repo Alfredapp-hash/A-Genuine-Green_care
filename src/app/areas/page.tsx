@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { PagePlaceholder } from "@/components/ui/PagePlaceholder";
 
-export const metadata: Metadata = { title: "About" };
+export const metadata: Metadata = { title: "Service Areas" };
 
 export default function Page() {
   return (
     <PagePlaceholder
-      title="About"
+      title="Service Areas"
       summary="This route is scaffolded and will be filled in the next build pass."
     />
   );

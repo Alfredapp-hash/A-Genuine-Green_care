@@ -1,43 +1,43 @@
 import type { Metadata } from "next";
-import { Nunito, Pacifico } from "next/font/google";
+import { Fraunces, Source_Sans_3 } from "next/font/google";
+import { Footer } from "@/components/layout/Footer";
+import { Nav } from "@/components/layout/Nav";
+import { site } from "@/data/site";
 import "./globals.css";
-import Nav from "@/components/layout/Nav";
-import Footer from "@/components/layout/Footer";
 
-const nunito = Nunito({
-  variable: "--font-nunito",
+const display = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "600", "700", "800", "900"],
+  variable: "--font-display",
+  weight: ["500", "600", "700"],
 });
 
-const pacifico = Pacifico({
-  variable: "--font-pacifico",
+const body = Source_Sans_3({
   subsets: ["latin"],
-  weight: "400",
+  variable: "--font-body",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "Saltwater Sprouts Early Learning Center",
-    template: "%s | Saltwater Sprouts",
+    default: `${site.name} | Lawn Care & Landscaping`,
+    template: `%s | ${site.name}`,
   },
-  description:
-    "Affordable childcare and early childhood education for infants through age 4 in Georgetown County, SC. Safe, inclusive, and enriching — where every child can grow.",
-  keywords: ["childcare", "early learning", "Georgetown County", "preschool", "daycare", "infants", "toddlers", "South Carolina"],
+  description: site.description,
   openGraph: {
-    title: "Saltwater Sprouts Early Learning Center",
-    description: "Where little ones learn and thrive — Georgetown County, SC.",
+    title: site.legalName,
+    description: site.description,
     type: "website",
-    locale: "en_US",
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" className={`${nunito.variable} ${pacifico.variable}`}>
-      <body className="min-h-screen flex flex-col antialiased">
+    <html lang="en" className={`${display.variable} ${body.variable} h-full`}>
+      <body className="min-h-full flex flex-col antialiased">
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />

@@ -1,162 +1,100 @@
 @import "tailwindcss";
 
+:root {
+  --forest: #1a3d2b;
+  --forest-deep: #0f2419;
+  --leaf: #2f6b45;
+  --moss: #4a8f5c;
+  --gold: #c4a35a;
+  --gold-soft: #e2c987;
+  --cream: #f7f4ec;
+  --mist: #e8efe9;
+  --charcoal: #1c1f1d;
+  --ink: #121412;
+  --paper: #fbfaf6;
+  --lawn-glow: rgba(47, 107, 69, 0.35);
+}
+
 @theme inline {
-  /* Brand colors */
-  --color-navy:    #1B3A5C;
-  --color-sage:    #5B8A5A;
-  --color-coral:   #E8896A;
-  --color-sand:    #D4B896;
-  --color-seafoam: #B8D4CE;
-  --color-cream:   #F8F5F0;
-  --color-white:   #FFFFFF;
-
-  /* Font families */
-  --font-sans:    var(--font-nunito), "Nunito", system-ui, sans-serif;
-  --font-script:  var(--font-pacifico), "Pacifico", cursive;
-
-  /* Background / foreground */
-  --color-background: var(--color-white);
-  --color-foreground: var(--color-navy);
-
-  /* Shadow tokens */
-  --shadow-card:     0 1px 3px rgba(27,58,92,0.06), 0 4px 16px rgba(27,58,92,0.04);
-  --shadow-elevated: 0 4px 12px rgba(27,58,92,0.10), 0 12px 32px rgba(27,58,92,0.08);
-  --shadow-deep:     0 8px 24px rgba(27,58,92,0.14), 0 24px 64px rgba(27,58,92,0.12);
+  --color-forest: var(--forest);
+  --color-forest-deep: var(--forest-deep);
+  --color-leaf: var(--leaf);
+  --color-moss: var(--moss);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-cream: var(--cream);
+  --color-mist: var(--mist);
+  --color-charcoal: var(--charcoal);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-body);
 }
 
-/* ─── Force light mode always — this is a childcare site ─── */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #ffffff;
-    --foreground: #1B3A5C;
-    color-scheme: light;
-  }
-}
-
-/* ─── Base ──────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
-  color-scheme: light;
 }
 
 body {
-  background: var(--color-background);
-  color: var(--color-foreground);
-  font-family: var(--font-sans);
+  background: var(--paper);
+  color: var(--charcoal);
+  font-family: var(--font-body), system-ui, sans-serif;
 }
 
-/* ─── Text selection ─────────────────────────────────────── */
 ::selection {
-  background: #B8D4CE;
-  color: #1B3A5C;
+  background: color-mix(in oklab, var(--gold) 55%, white);
+  color: var(--ink);
 }
 
-/* ─── Custom scrollbar (WebKit) ─────────────────────────── */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #F8F5F0;
-}
-::-webkit-scrollbar-thumb {
-  background: #B8D4CE;
-  border-radius: 99px;
-  border: 2px solid #F8F5F0;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #1B3A5C;
-}
-
-/* ─── Gradient utilities ─────────────────────────────────── */
-.gradient-ocean {
-  background: linear-gradient(180deg, #B8D4CE 0%, #ffffff 100%);
-}
-
-.gradient-hero {
-  background: linear-gradient(
-    180deg,
-    rgba(184, 212, 206, 0.30) 0%,
-    #ffffff 50%,
-    #F8F5F0 100%
-  );
-}
-
-/* ─── Shadow utilities ───────────────────────────────────── */
-.shadow-card {
-  box-shadow: 0 1px 3px rgba(27,58,92,0.06), 0 4px 16px rgba(27,58,92,0.04);
-}
-
-.shadow-elevated {
-  box-shadow: 0 4px 12px rgba(27,58,92,0.10), 0 12px 32px rgba(27,58,92,0.08);
-}
-
-.shadow-deep {
-  box-shadow: 0 8px 24px rgba(27,58,92,0.14), 0 24px 64px rgba(27,58,92,0.12);
-}
-
-/* ─── Section wave spacing ───────────────────────────────── */
-.section-wave-top {
-  padding-top: 5rem;
-}
-
-.section-wave-bottom {
-  padding-bottom: 5rem;
-}
-
-/* ─── Typography utilities ───────────────────────────────── */
 .font-display {
-  font-family: var(--font-nunito);
-  font-weight: 900;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display), Georgia, serif;
 }
 
-.text-balance {
-  text-wrap: balance;
+.hero-atmosphere {
+  background:
+    linear-gradient(
+      120deg,
+      rgba(15, 36, 25, 0.72) 0%,
+      rgba(26, 61, 43, 0.45) 42%,
+      rgba(15, 36, 25, 0.55) 100%
+    ),
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(196, 163, 90, 0.22), transparent 55%),
+    linear-gradient(180deg, #1a3d2b 0%, #2f6b45 45%, #1a3d2b 100%);
 }
 
-/* ─── Keyframes ─────────────────────────────────────────── */
-@keyframes wave {
-  0%, 100% { transform: translateX(0); }
-  50%       { transform: translateX(-25px); }
+.hero-grass-texture {
+  background-image:
+    repeating-linear-gradient(
+      -12deg,
+      transparent,
+      transparent 10px,
+      rgba(255, 255, 255, 0.02) 10px,
+      rgba(255, 255, 255, 0.02) 11px
+    ),
+    radial-gradient(circle at 20% 80%, rgba(74, 143, 92, 0.35), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(196, 163, 90, 0.12), transparent 35%);
 }
 
-@keyframes bob {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-6px); }
+@keyframes mower-shake {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(1.5px);
+  }
 }
 
-@keyframes float {
-  0%,  100% { transform: translateY(0)    rotate(0deg);  }
-  33%        { transform: translateY(-8px) rotate(1deg);  }
-  66%        { transform: translateY(-4px) rotate(-1deg); }
+.mower-vibrate {
+  animation: mower-shake 0.12s linear infinite;
 }
 
-@keyframes shimmer {
-  0%   { background-position: -400px 0; }
-  100% { background-position:  400px 0; }
-}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1;   transform: scale(1);    }
-  50%       { opacity: 0.6; transform: scale(0.85); }
-}
-
-/* ─── Animation utilities ────────────────────────────────── */
-.animate-wave    { animation: wave      6s ease-in-out infinite; }
-.animate-bob     { animation: bob       3s ease-in-out infinite; }
-.animate-float   { animation: float     6s ease-in-out infinite; }
-.animate-shimmer { animation: shimmer   1.4s linear     infinite; }
-.animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
-
-/* ─── Skeleton loading ───────────────────────────────────── */
-.skeleton {
-  background: linear-gradient(
-    90deg,
-    rgba(184, 212, 206, 0.3) 25%,
-    rgba(184, 212, 206, 0.6) 50%,
-    rgba(184, 212, 206, 0.3) 75%
-  );
-  background-size: 400px 100%;
-  animation: shimmer 1.4s linear infinite;
+  .mower-vibrate {
+    animation: none;
+  }
 }
