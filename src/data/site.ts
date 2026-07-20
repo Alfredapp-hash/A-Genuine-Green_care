@@ -11,6 +11,17 @@ export const site = {
   // Replace with confirmed GBP service area once Place details are locked.
   serviceAreaLabel: "Your neighborhood & surrounding communities",
   cityPlaceholder: "Local",
+  hours: [
+    { day: "Monday–Friday", time: "7:00 AM – 6:00 PM" },
+    { day: "Saturday", time: "8:00 AM – 2:00 PM" },
+    { day: "Sunday", time: "Closed" },
+  ],
+  owner: {
+    name: "Owner-operator",
+    role: "Founder",
+    blurb:
+      "Hands-on lawn care with an eye for clean edges and honest communication — the kind of service you’d want next door.",
+  },
 } as const;
 
 export const navLinks = [

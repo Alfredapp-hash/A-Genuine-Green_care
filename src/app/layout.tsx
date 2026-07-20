@@ -18,6 +18,7 @@ const body = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://genuinegreencare.com"),
   title: {
     default: `${site.name} | Lawn Care & Landscaping`,
     template: `%s | ${site.name}`,
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
     title: site.legalName,
     description: site.description,
     type: "website",
+    images: [{ url: "/avatar/owner-mower.webp", alt: `${site.name} owner on lawn mower` }],
   },
 };
 
