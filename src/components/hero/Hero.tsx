@@ -2,19 +2,14 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { site } from "@/data/site";
 import { MowerAvatar } from "@/components/hero/MowerAvatar";
 
 export function Hero() {
   const reduceMotion = useReducedMotion();
-  const [copyReady, setCopyReady] = useState(false);
-
-  useEffect(() => {
-    if (reduceMotion) {
-      setCopyReady(true);
-    }
-  }, [reduceMotion]);
+  const [animationDone, setAnimationDone] = useState(false);
+  const showCopy = Boolean(reduceMotion) || animationDone;
 
   return (
     <section className="relative min-h-[100svh] overflow-hidden text-cream">
@@ -29,14 +24,14 @@ export function Hero() {
         aria-hidden
       />
 
-      <MowerAvatar onComplete={() => setCopyReady(true)} />
+      <MowerAvatar onComplete={() => setAnimationDone(true)} />
 
-      {!reduceMotion ? <CopyRevealFallback onReady={() => setCopyReady(true)} /> : null}
+      {!reduceMotion ? <CopyRevealFallback onReady={() => setAnimationDone(true)} /> : null}
 
       <div className="relative z-30 mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-end px-4 pb-16 pt-28 sm:px-6 sm:pb-20 md:justify-center md:pb-24">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 28 }}
-          animate={copyReady || reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
+          animate={showCopy ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
           transition={{ duration: 0.65, ease: [0.22, 0.61, 0.36, 1] }}
           className="max-w-xl"
         >
