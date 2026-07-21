@@ -2,10 +2,12 @@ import type { MetadataRoute } from "next";
 import { serviceAreas } from "@/data/areas";
 import { blogPosts } from "@/data/blog";
 import { services } from "@/data/services";
-
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://genuinegreencare.com";
+import { siteUrl } from "@/data/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  // No lastModified on evergreen routes: stamping build time on every page
+  // tells crawlers everything changed on every deploy, which dilutes the
+  // signal on pages that actually did.
   const staticRoutes = [
     "",
     "/services",
@@ -17,22 +19,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contact",
     "/blog",
   ].map((path) => ({
-    url: `${baseUrl}${path}`,
-    lastModified: new Date(),
+    url: `${siteUrl}${path}`,
   }));
 
   const serviceRoutes = services.map((service) => ({
-    url: `${baseUrl}/services/${service.slug}`,
-    lastModified: new Date(),
+    url: `${siteUrl}/services/${service.slug}`,
   }));
 
   const areaRoutes = serviceAreas.map((area) => ({
-    url: `${baseUrl}/areas/${area.slug}`,
-    lastModified: new Date(),
+    url: `${siteUrl}/areas/${area.slug}`,
   }));
 
   const blogRoutes = blogPosts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
+    url: `${siteUrl}/blog/${post.slug}`,
     lastModified: new Date(post.date),
   }));
 

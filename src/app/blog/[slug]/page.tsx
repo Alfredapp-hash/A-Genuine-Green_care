@@ -3,8 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DualCta } from "@/components/services/DualCta";
 import { QuickAnswer } from "@/components/services/QuickAnswer";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { blogPosts, getPost } from "@/data/blog";
-import { site } from "@/data/site";
+import { site, siteUrl } from "@/data/site";
+import { breadcrumbJsonLd } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -17,9 +19,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPost(slug);
   if (!post) return {};
 
+  // The root layout template appends the site name — no manual suffix here,
+  // or titles double up ("… | Genuine Green Care | Genuine Green Care").
   return {
-    title: `${post.title} | ${site.name}`,
+    title: post.title,
     description: post.excerpt,
+    openGraph: {
+      type: "article",
+      publishedTime: post.date,
+      title: post.title,
+      description: post.excerpt,
+    },
   };
 }
 
@@ -38,6 +48,24 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.title,
+          description: post.excerpt,
+          datePublished: post.date,
+          author: { "@type": "Organization", name: site.legalName },
+          publisher: { "@type": "Organization", name: site.legalName },
+          mainEntityOfPage: `${siteUrl}/blog/${post.slug}`,
+        }}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Tips", path: "/blog" },
+          { name: post.title, path: `/blog/${post.slug}` },
+        ])}
+      />
       <article>
         <header className="bg-forest-deep px-4 pb-14 pt-28 text-cream sm:px-6">
           <div className="mx-auto max-w-3xl">

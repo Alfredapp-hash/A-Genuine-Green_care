@@ -24,11 +24,21 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: site.description,
+  // "./" resolves per-route against metadataBase, giving every page a
+  // self-referencing canonical without repeating it in each route.
+  alternates: { canonical: "./" },
   openGraph: {
     title: site.legalName,
     description: site.description,
     type: "website",
+    siteName: site.name,
     images: [{ url: "/avatar/owner-mower.webp", alt: `${site.name} owner on lawn mower` }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: site.legalName,
+    description: site.description,
+    images: ["/avatar/owner-mower.webp"],
   },
 };
 

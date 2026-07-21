@@ -4,6 +4,8 @@ import { site } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Quote received",
+  // Post-submit confirmation — never useful in search results.
+  robots: { index: false, follow: true },
 };
 
 export default function QuoteThanksPage() {

@@ -7,8 +7,7 @@ import { QuickAnswer } from "@/components/services/QuickAnswer";
 import { ServiceSteps } from "@/components/services/ServiceSteps";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getService, services } from "@/data/services";
-import { site } from "@/data/site";
-import { faqJsonLd, serviceJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -22,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!service) return {};
 
   return {
-    title: `${service.name} in ${site.cityPlaceholder}`,
+    title: service.name,
     description: service.shortDescription,
   };
 }
@@ -36,6 +35,12 @@ export default async function ServiceDetailPage({ params }: Props) {
     <>
       <JsonLd data={serviceJsonLd(service)} />
       <JsonLd data={faqJsonLd(service.faqs)} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Services", path: "/services" },
+          { name: service.name, path: `/services/${service.slug}` },
+        ])}
+      />
 
       <section className="bg-forest-deep px-4 pb-14 pt-28 text-cream sm:px-6">
         <div className="mx-auto max-w-6xl">

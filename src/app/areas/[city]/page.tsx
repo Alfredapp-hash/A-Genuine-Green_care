@@ -8,7 +8,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { getArea, serviceAreas } from "@/data/areas";
 import { services } from "@/data/services";
 import { site } from "@/data/site";
-import { faqJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
 
 type Props = { params: Promise<{ city: string }> };
 
@@ -53,6 +53,12 @@ export default async function AreaDetailPage({ params }: Props) {
         data={faqJsonLd([
           { question: area.quickAnswer.question, answer: area.quickAnswer.answer },
           ...faqs,
+        ])}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Areas", path: "/areas" },
+          { name: area.name, path: `/areas/${area.slug}` },
         ])}
       />
 
