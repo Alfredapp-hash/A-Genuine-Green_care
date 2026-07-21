@@ -5,10 +5,12 @@ import { Nav } from "@/components/layout/Nav";
 import { site } from "@/data/site";
 import "./globals.css";
 
+// Every font-display usage in the codebase is font-semibold — shipping
+// only the 600 weight keeps two font files out of the critical path.
 const display = Fraunces({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["500", "600", "700"],
+  weight: ["600"],
 });
 
 const body = Source_Sans_3({
