@@ -1,4 +1,4 @@
-import { Hero } from "@/components/hero/Hero";
+import { VideoHero } from "@/components/hero/VideoHero";
 import { GoogleReviewsSection } from "@/components/reviews/GoogleReviewsSection";
 import { ServicesTeaser } from "@/components/sections/ServicesTeaser";
 import { TrustStrip } from "@/components/sections/TrustStrip";
@@ -11,7 +11,7 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={localBusinessJsonLd(featuredReviews)} />
-      <Hero />
+      <VideoHero />
       <TrustStrip />
       <ServicesTeaser />
       <GoogleReviewsSection reviews={homepageReviews} />
