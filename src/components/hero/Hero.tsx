@@ -50,11 +50,22 @@ export function Hero() {
   const settled = mowed || Boolean(reduceMotion);
 
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-forest-deep text-cream">
+    <section className="hero-noscript relative min-h-[100svh] overflow-hidden bg-forest-deep text-cream">
+      {/* SSR ships the hero pre-animation (name clipped, copy transparent);
+          without JS nothing would ever reveal. This unhides the finished
+          state for no-JS visitors and crawlers that don't execute scripts. */}
+      <noscript>
+        <style>{`
+          .hero-noscript h1 { clip-path: none !important; }
+          .hero-noscript .hero-copy { opacity: 1 !important; transform: none !important; }
+          .hero-noscript .hero-lawn { clip-path: none !important; }
+          .hero-noscript .hero-jungle { display: none !important; }
+        `}</style>
+      </noscript>
       <TrimmedLawnLayer clip={lawnClip} />
 
       <motion.div
-        className={`absolute inset-0 z-20 ${settled ? "jungle-settled" : ""}`}
+        className={`hero-jungle absolute inset-0 z-20 ${settled ? "jungle-settled" : ""}`}
         style={{ clipPath: jungleClip }}
         aria-hidden
       >
@@ -75,7 +86,7 @@ export function Hero() {
         </motion.h1>
 
         <motion.div
-          className="max-w-2xl px-4 sm:px-6"
+          className="hero-copy max-w-2xl px-4 sm:px-6"
           initial={reduceMotion ? false : { opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
@@ -120,7 +131,7 @@ export function Hero() {
 
 function TrimmedLawnLayer({ clip }: { clip: MotionValue<string> }) {
   return (
-    <motion.div className="absolute inset-0 z-10" style={{ clipPath: clip }} aria-hidden>
+    <motion.div className="hero-lawn absolute inset-0 z-10" style={{ clipPath: clip }} aria-hidden>
       <TrimmedLawn />
     </motion.div>
   );

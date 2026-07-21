@@ -12,7 +12,11 @@ export function StarRating({
   const px = size === "sm" ? "h-3.5 w-3.5" : size === "lg" ? "h-5 w-5" : "h-4 w-4";
 
   return (
-    <div className={`inline-flex items-center gap-0.5 ${className}`} aria-label={`${value} out of 5 stars`}>
+    <div
+      role="img"
+      aria-label={`${value} out of 5 stars`}
+      className={`inline-flex items-center gap-0.5 ${className}`}
+    >
       {Array.from({ length: 5 }).map((_, i) => (
         <Star
           key={i}

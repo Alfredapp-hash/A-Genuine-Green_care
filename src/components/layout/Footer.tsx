@@ -60,7 +60,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-cream/10">
-        <p className="mx-auto max-w-6xl px-4 py-5 text-xs text-cream/50 sm:px-6">
+        <p className="mx-auto max-w-6xl px-4 py-5 text-xs text-cream/70 sm:px-6">
           © {new Date().getFullYear()} {site.legalName}. All rights reserved.
         </p>
       </div>

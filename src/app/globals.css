@@ -46,6 +46,33 @@ body {
   color: var(--ink);
 }
 
+/* One visible focus treatment everywhere; :focus-visible keeps it off
+   mouse clicks. The gold ring reads on both dark and light sections. */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 0.75rem;
+  top: 0.75rem;
+  z-index: 100;
+  transform: translateY(-300%);
+  padding: 0.65rem 1rem;
+  background: var(--forest-deep);
+  color: var(--cream);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 2px;
+  transition: transform 0.15s ease;
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
 .font-display {
   font-family: var(--font-display), Georgia, serif;
 }

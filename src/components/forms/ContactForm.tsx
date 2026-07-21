@@ -25,7 +25,7 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="border-t border-forest/15 pt-6">
+      <div role="status" className="border-t border-forest/15 pt-6">
         <p className="font-display text-2xl font-semibold text-ink">Message sent.</p>
         <p className="mt-2 text-base text-charcoal/75">
           Thanks — we’ll get back to you shortly. For faster help, give us a call.
@@ -58,7 +58,7 @@ export function ContactForm() {
       <TextAreaField label="Message" name="message" required />
 
       {status === "error" ? (
-        <p className="text-sm font-medium text-red-700">
+        <p role="alert" className="text-sm font-medium text-red-700">
           Something went wrong. Please try again or call us directly.
         </p>
       ) : null}
@@ -66,6 +66,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
+        aria-busy={status === "submitting"}
         className="inline-flex rounded-sm bg-forest px-6 py-3.5 text-sm font-bold text-cream transition hover:bg-leaf disabled:opacity-60"
       >
         {status === "submitting" ? "Sending…" : "Send message"}

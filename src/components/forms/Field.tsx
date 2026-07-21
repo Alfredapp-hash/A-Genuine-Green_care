@@ -2,7 +2,7 @@ import type { InputHTMLAttributes, TextareaHTMLAttributes } from "react";
 
 const labelClass = "block text-sm font-semibold text-ink";
 const inputClass =
-  "mt-2 w-full rounded-sm border border-forest/20 bg-paper px-3 py-2.5 text-sm text-ink outline-none transition focus:border-leaf";
+  "mt-2 w-full rounded-sm border border-forest/20 bg-paper px-3 py-2.5 text-sm text-ink transition focus:border-leaf focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-leaf";
 
 export function TextField({
   label,

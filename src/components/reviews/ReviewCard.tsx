@@ -23,7 +23,7 @@ export function ReviewCard({ review }: { review: GoogleReview }) {
       </blockquote>
       <footer className="mt-5">
         <p className="text-sm font-semibold text-ink">{review.author}</p>
-        <p className="mt-1 text-xs text-charcoal/55">
+        <p className="mt-1 text-xs text-charcoal/70">
           {formatReviewDate(review.date)}
           {review.service ? ` · ${review.service}` : null}
         </p>

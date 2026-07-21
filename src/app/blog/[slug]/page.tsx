@@ -73,7 +73,7 @@ export default async function BlogPostPage({ params }: Props) {
               <Link href="/blog" className="hover:text-gold">
                 Tips
               </Link>
-              <span className="mx-2 text-cream/40">/</span>
+              <span aria-hidden className="mx-2 text-cream/40">/</span>
               {post.category}
             </p>
             <h1 className="font-display mt-3 text-4xl font-semibold sm:text-5xl">{post.title}</h1>

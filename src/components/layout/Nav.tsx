@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, Phone, X } from "lucide-react";
 import { navLinks, site } from "@/data/site";
 
@@ -10,6 +10,15 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const onHome = pathname === "/";
+
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
 
   return (
     <header
@@ -27,7 +36,7 @@ export function Nav() {
           {site.name}
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav aria-label="Main" className="hidden items-center gap-7 lg:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -58,6 +67,7 @@ export function Nav() {
             onClick={() => setOpen((v) => !v)}
             className="inline-flex h-10 w-10 items-center justify-center rounded-sm bg-cream/10 text-cream"
             aria-expanded={open}
+            aria-controls="mobile-menu"
             aria-label="Toggle menu"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -66,7 +76,11 @@ export function Nav() {
       </div>
 
       {open ? (
-        <div className="border-t border-cream/10 bg-forest-deep/95 px-4 py-4 backdrop-blur lg:hidden">
+        <nav
+          id="mobile-menu"
+          aria-label="Main"
+          className="border-t border-cream/10 bg-forest-deep/95 px-4 py-4 backdrop-blur lg:hidden"
+        >
           <div className="mx-auto flex max-w-6xl flex-col gap-3">
             {navLinks.map((link) => (
               <Link
@@ -86,7 +100,7 @@ export function Nav() {
               Get a Free Quote
             </Link>
           </div>
-        </div>
+        </nav>
       ) : null}
     </header>
   );

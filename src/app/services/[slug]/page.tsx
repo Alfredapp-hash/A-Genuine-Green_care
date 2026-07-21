@@ -48,7 +48,7 @@ export default async function ServiceDetailPage({ params }: Props) {
             <Link href="/services" className="hover:text-gold">
               Services
             </Link>
-            <span className="mx-2 text-cream/40">/</span>
+            <span aria-hidden className="mx-2 text-cream/40">/</span>
             {service.name}
           </p>
           <h1 className="font-display mt-3 max-w-3xl text-4xl font-semibold sm:text-5xl">

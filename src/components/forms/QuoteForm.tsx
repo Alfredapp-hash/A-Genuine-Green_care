@@ -88,7 +88,7 @@ export function QuoteForm() {
       />
 
       {status === "error" ? (
-        <p className="text-sm font-medium text-red-700">
+        <p role="alert" className="text-sm font-medium text-red-700">
           Something went wrong. Please try again or call us directly.
         </p>
       ) : null}
@@ -96,6 +96,7 @@ export function QuoteForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
+        aria-busy={status === "submitting"}
         className="inline-flex rounded-sm bg-gold px-6 py-3.5 text-sm font-bold text-forest-deep transition hover:bg-gold-soft disabled:opacity-60"
       >
         {status === "submitting" ? "Sending…" : "Request free quote"}

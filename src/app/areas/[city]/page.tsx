@@ -68,7 +68,7 @@ export default async function AreaDetailPage({ params }: Props) {
             <Link href="/areas" className="hover:text-gold">
               Areas
             </Link>
-            <span className="mx-2 text-cream/40">/</span>
+            <span aria-hidden className="mx-2 text-cream/40">/</span>
             {area.name}
           </p>
           <h1 className="font-display mt-3 max-w-3xl text-4xl font-semibold sm:text-5xl">
