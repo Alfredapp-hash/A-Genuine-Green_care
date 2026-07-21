@@ -13,6 +13,13 @@ export const googleRating = {
   reviewCount: 24,
   bestRating: 5,
   worstRating: 1,
+  /**
+   * Structured-data gate. The reviews below are placeholder copy; emitting
+   * them as schema.org Review/AggregateRating markup before they are real
+   * GBP reviews risks a Google manual action. Flip to true only after the
+   * reviews and rating above are replaced with verified live data.
+   */
+  verified: false,
 } as const;
 
 /** Featured Google reviews — replace with live GBP copy when Place details are confirmed. */

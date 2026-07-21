@@ -1,3 +1,6 @@
+export const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://genuinegreencare.com";
+
 export const site = {
   name: "Genuine Green Care",
   legalName: "Genuine Green Care Landscaping",

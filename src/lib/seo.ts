@@ -1,18 +1,27 @@
 import { googleRating, type GoogleReview } from "@/data/reviews";
-import { site } from "@/data/site";
+import { site, siteUrl } from "@/data/site";
 
 export function localBusinessJsonLd(reviews: GoogleReview[]) {
-  return {
+  const base = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": `${site.googleShareUrl}#business`,
+    "@id": `${siteUrl}/#business`,
     name: site.legalName,
     description: site.description,
-    url: site.googleShareUrl,
+    url: siteUrl,
     telephone: site.phone,
     email: site.email,
-    image: "/avatar/owner-mower.webp",
+    image: `${siteUrl}/avatar/owner-mower.webp`,
     areaServed: site.serviceAreaLabel,
+    sameAs: [site.googleShareUrl],
+  };
+
+  // Review markup is only emitted once the data is verified live GBP copy —
+  // fabricated review structured data risks a Google manual action.
+  if (!googleRating.verified) return base;
+
+  return {
+    ...base,
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: googleRating.ratingValue,
@@ -65,10 +74,24 @@ export function serviceJsonLd(service: {
     description: service.shortDescription,
     provider: {
       "@type": "LocalBusiness",
+      "@id": `${siteUrl}/#business`,
       name: site.legalName,
       telephone: site.phone,
     },
     areaServed: site.serviceAreaLabel,
-    url: `/services/${service.slug}`,
+    url: `${siteUrl}/services/${service.slug}`,
+  };
+}
+
+export function breadcrumbJsonLd(crumbs: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((crumb, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: crumb.name,
+      item: `${siteUrl}${crumb.path}`,
+    })),
   };
 }

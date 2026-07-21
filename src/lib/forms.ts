@@ -13,6 +13,8 @@ export async function submitNetlifyForm(formData: FormData) {
   });
 
   if (!response.ok) {
-    throw new Error("Form submission failed");
+    throw new Error(
+      `Form submission failed: ${response.status} ${response.statusText}`,
+    );
   }
 }
