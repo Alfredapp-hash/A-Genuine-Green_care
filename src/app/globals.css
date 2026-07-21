@@ -158,51 +158,38 @@ body {
 
 /* ---------- Hero: "Care" completing the name over the held frame ---------- */
 
-.care-pop {
-  margin: 0;
-  transform: translateX(-50%);
+/* Drawn inside the video's own 1280x720 viewBox, so scaling and cropping are
+   handled by the SVG itself — nothing here depends on measured pixels. */
+.care-svg {
   font-family: Georgia, "Times New Roman", serif;
   font-weight: 700;
   font-style: italic;
-  line-height: 1;
-  letter-spacing: 0.01em;
-  background-image: linear-gradient(178deg, #b8e35c 8%, #5cb832 52%, #3d8f1f 94%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  /* Stacked shadows read as an extruded block — the semi-3D depth. */
-  text-shadow:
-    0 0.012em 0 #2c6e1e,
-    0 0.024em 0 #2c6e1e,
-    0 0.036em 0 #1e4f13,
-    0 0.048em 0 #1e4f13,
-    0 0.066em 0.012em rgba(20, 40, 12, 0.45),
-    0 0.11em 0.16em rgba(20, 40, 12, 0.5);
   opacity: 0;
   visibility: hidden;
+  transform-box: fill-box;
+  transform-origin: 50% 60%;
 }
 
-.care-pop.is-in {
+.care-svg.is-in {
   visibility: visible;
-  animation: care-pop 0.9s cubic-bezier(0.24, 1.36, 0.36, 1) forwards;
+  animation: care-pop 0.85s cubic-bezier(0.24, 1.36, 0.36, 1) forwards;
 }
 
 @keyframes care-pop {
   0% {
     opacity: 0;
-    transform: translateX(-50%) perspective(700px) rotateX(58deg) scale(0.25) translateY(36%);
+    transform: perspective(900px) rotateX(62deg) scale(0.3) translateY(14%);
   }
   55% {
     opacity: 1;
-    transform: translateX(-50%) perspective(700px) rotateX(-9deg) scale(1.12) translateY(-4%);
+    transform: perspective(900px) rotateX(-8deg) scale(1.1) translateY(-2%);
   }
-  76% {
-    transform: translateX(-50%) perspective(700px) rotateX(4deg) scale(0.97);
+  78% {
+    transform: perspective(900px) rotateX(3deg) scale(0.98);
   }
   100% {
     opacity: 1;
-    transform: translateX(-50%) perspective(700px) rotateX(0) scale(1);
+    transform: perspective(900px) rotateX(0) scale(1);
   }
 }
 
@@ -300,10 +287,10 @@ body {
     animation: none;
   }
 
-  .care-pop.is-in {
+  .care-svg.is-in {
     animation: none;
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%);
+    transform: none;
   }
 }
