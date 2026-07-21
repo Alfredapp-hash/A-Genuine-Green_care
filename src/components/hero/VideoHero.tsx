@@ -75,10 +75,10 @@ export function VideoHero() {
           mobile where the stage is only ~220px tall. */}
       <div className="h-16 sm:h-[76px]" aria-hidden />
 
-      <div
-        className="relative w-full overflow-hidden"
-        style={{ height: "min(72svh, 56.25vw)" }}
-      >
+      {/* Exactly 16:9 — the clip's own ratio. Any other stage shape would make
+          object-fit: cover crop the frame (a height cap here was cutting ~80px
+          off the top and bottom on desktop and reading as a zoom-in). */}
+      <div className="relative aspect-video w-full overflow-hidden">
         <video
           ref={videoRef}
           className="absolute inset-0 h-full w-full object-cover"
