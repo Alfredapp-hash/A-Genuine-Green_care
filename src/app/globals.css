@@ -50,18 +50,6 @@ body {
   font-family: var(--font-display), Georgia, serif;
 }
 
-.hero-atmosphere {
-  background:
-    linear-gradient(
-      120deg,
-      rgba(15, 36, 25, 0.72) 0%,
-      rgba(26, 61, 43, 0.45) 42%,
-      rgba(15, 36, 25, 0.55) 100%
-    ),
-    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(196, 163, 90, 0.22), transparent 55%),
-    linear-gradient(180deg, #1a3d2b 0%, #2f6b45 45%, #1a3d2b 100%);
-}
-
 .hero-grass-texture {
   background-image:
     repeating-linear-gradient(
@@ -73,6 +61,95 @@ body {
     ),
     radial-gradient(circle at 20% 80%, rgba(74, 143, 92, 0.35), transparent 40%),
     radial-gradient(circle at 80% 70%, rgba(196, 163, 90, 0.12), transparent 35%);
+}
+
+/* ---------- Hero: the mown "after" state ---------- */
+
+.lawn-base {
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 6%, rgba(196, 163, 90, 0.2), transparent 62%),
+    linear-gradient(180deg, #17452a 0%, #2a6f43 36%, #35854f 70%, #235f39 100%);
+}
+
+/* Each mower pass leaves a band — nearly horizontal, matching the travel line. */
+.lawn-stripes {
+  background-image: repeating-linear-gradient(
+    182deg,
+    rgba(233, 255, 236, 0.085) 0 34px,
+    rgba(3, 24, 13, 0.11) 34px 68px
+  );
+}
+
+.lawn-light {
+  background:
+    radial-gradient(ellipse 70% 45% at 50% 36%, rgba(255, 244, 205, 0.15), transparent 66%),
+    linear-gradient(180deg, rgba(9, 30, 18, 0.6) 0%, transparent 28%, rgba(9, 30, 18, 0.4) 100%);
+}
+
+.hero-canopy {
+  background: linear-gradient(
+    180deg,
+    rgba(8, 26, 16, 0.85) 0%,
+    rgba(8, 26, 16, 0.32) 55%,
+    transparent 100%
+  );
+}
+
+/* Bright lip of freshly cut grass travelling with the mower deck. */
+.cut-edge {
+  background: linear-gradient(
+    90deg,
+    rgba(143, 215, 156, 0) 0%,
+    rgba(143, 215, 156, 0.28) 40%,
+    rgba(226, 255, 232, 0.5) 50%,
+    rgba(6, 24, 14, 0.45) 58%,
+    rgba(6, 24, 14, 0) 100%
+  );
+  filter: blur(3px);
+}
+
+/* Company name read as letters cut into the turf: bright mown face, darker
+   grass walls extruded below, soft shadow in the cut. */
+.grass-name {
+  background-image:
+    repeating-linear-gradient(
+      94deg,
+      rgba(255, 255, 255, 0.14) 0 4px,
+      rgba(255, 255, 255, 0) 4px 11px
+    ),
+    linear-gradient(180deg, #b6e7bb 0%, #7fd08c 46%, #57ad69 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    0 2px 0 #3f8250,
+    0 4px 0 #2f6b45,
+    0 6px 0 #235536,
+    0 12px 18px rgba(4, 20, 11, 0.55);
+}
+
+/* ---------- Hero: motion ---------- */
+
+@keyframes jungle-sway {
+  0%,
+  100% {
+    transform: skewX(-1.6deg);
+  }
+  50% {
+    transform: skewX(1.8deg);
+  }
+}
+
+.jungle-sway {
+  transform-box: view-box;
+  transform-origin: 50% 100%;
+  animation: jungle-sway 6s ease-in-out infinite;
+}
+
+/* Once the pass is done the leftover fringe stops burning frames. */
+.jungle-settled .jungle-sway {
+  animation-play-state: paused;
 }
 
 @keyframes mower-shake {
@@ -89,12 +166,60 @@ body {
   animation: mower-shake 0.12s linear infinite;
 }
 
+@keyframes mow-leg-swing {
+  0%,
+  100% {
+    transform: rotate(20deg);
+  }
+  50% {
+    transform: rotate(-18deg);
+  }
+}
+
+.mow-leg {
+  animation: mow-leg-swing 0.54s ease-in-out infinite;
+}
+
+.mow-leg-back {
+  animation-delay: -0.27s;
+}
+
+@keyframes mow-wheel-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mow-wheel {
+  animation: mow-wheel-spin 0.65s linear infinite;
+}
+
+@keyframes mow-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2.5px);
+  }
+}
+
+.mow-bob {
+  transform-box: view-box;
+  transform-origin: 50% 100%;
+  animation: mow-bob 0.54s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
-  .mower-vibrate {
+  .mower-vibrate,
+  .jungle-sway,
+  .mow-leg,
+  .mow-wheel,
+  .mow-bob {
     animation: none;
   }
 }
